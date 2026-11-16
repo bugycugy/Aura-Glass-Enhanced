@@ -246,8 +246,17 @@
     eq.innerHTML = "<i></i><i></i><i></i><i></i>";
     host.appendChild(eq);
   }
-  // React vuelve a pintar el reproductor a veces; lo reponemos si desaparece.
-  new MutationObserver(() => ensureEqualizer()).observe(
+  // React vuelve a pintar el reproductor a veces; agrupamos mutaciones
+  // en un único chequeo por frame para evitar consultas repetidas al DOM.
+  let equalizerFrame = 0;
+  const equalizerObserver = new MutationObserver(() => {
+    if (equalizerFrame) return;
+    equalizerFrame = requestAnimationFrame(() => {
+      equalizerFrame = 0;
+      ensureEqualizer();
+    });
+  });
+  equalizerObserver.observe(
     document.querySelector(".Root__now-playing-bar") || document.body,
     { childList: true, subtree: true }
   );
