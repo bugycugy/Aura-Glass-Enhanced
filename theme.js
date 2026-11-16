@@ -195,6 +195,8 @@
   const toHex = (rgb) => "#" + rgb.map((c) => c.toString(16).padStart(2, "0")).join("");
 
   async function onSongChange() {
+    // Handle the sleep timer immediately; artwork/color work below is asynchronous.
+    sleep.onSongChange();
     const item = S.Player.data && S.Player.data.item;
     if (!item) return;
     const url = coverUrl(item);
@@ -215,7 +217,6 @@
     applyColors();
     ensureEqualizer();
     if (showcase.open) showcase.load(item);
-    sleep.onSongChange();
   }
 
   /* ------------------------------------------------------------------ */
@@ -309,7 +310,8 @@
     },
 
     onSongChange() {
-      if (this.mode === "track" && this.startVolume !== null) this.finish();
+      // Track timer ends on the first song change, even if the fade never started.
+      if (this.mode === "track") this.finish();
     },
 
     finish() {
