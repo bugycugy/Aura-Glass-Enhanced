@@ -338,7 +338,15 @@
 
     onSongChange() {
       // Track timer ends on the first song change, even if the fade never started.
-      if (this.mode === "track") this.finish();
+      if (this.mode !== "track") return;
+      // Catch a manual volume adjustment made just before the track-change event.
+      if (
+        this.lastAppliedVolume !== null &&
+        Math.abs(S.Player.getVolume() - this.lastAppliedVolume) > VOLUME_CHANGE_EPSILON
+      ) {
+        this.startVolume = S.Player.getVolume();
+      }
+      this.finish();
     },
 
     finish() {
