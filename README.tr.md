@@ -1,6 +1,6 @@
 # Aura Glass
 
-[🇬🇧 English](README.en.md) · [🇪🇸 Español](README.md) · [🇹🇷 Türkçe](README.tr.md)
+[🇬🇧 English](README.md) · [🇪🇸 Español](README.es.md) · [🇹🇷 Türkçe](README.tr.md)
 
 **Spotify'a cam gibi bir görünüm.** Her şarkı, albüm kapağının renkleriyle uygulamanın tamamını yeniden renklendirir.
 
@@ -92,3 +92,19 @@ Windows 11 üzerinde Spotify 1.3.8 ve Spicetify 2.46.4 ile test edilmiştir.
 ## Lisans
 
 MIT
+
+
+## Çeviri katkısı nasıl yapılır?
+
+Aura Glass'ı kendi diline çevirmek ister misin? Programlama bilmeden de katkıda bulunabilirsin.
+
+1. README.md dosyasını kopyala ve kopyanın adını README.<dil-kodu>.md yap (örneğin Fransızca için README.fr.md). [ISO 639-1 dil kodunu](https://en.wikipedia.org/wiki/ISO_639-1_codes) kullan.
+2. Başlıkları, açıklamaları, özellik listelerini, kurulum ve kullanım talimatlarını çevir.
+3. Komutları, kod bloklarını, dosya yollarını, ayar adlarını, klavye kısayollarını, URL'leri ve ürün adlarını değiştirme. AuraGlass, color_scheme ve spicetify gibi teknik tanımlayıcıları aynen koru.
+4. Yeni dile özel bir görsel eklemiyorsan görsel bağlantılarını ve göreli dosya yollarını değiştirme.
+5. Yeni dil bağlantısını tüm README çevirilerinin en üstündeki dil seçicisine, aynı sıralama ve biçimi koruyarak ekle.
+6. Yeni dosyayı ve güncellenmiş dil bağlantılarını içeren bir pull request aç.
+
+Anlaşılır ve doğal bir dil kullan; teknik talimatların anlamını diğer dillerle tutarlı tut. Çeviri tamamlanmadıysa pull request açıklamasında bunu belirt ki gözden geçirilebilsin.
+
+Mevcut dokümantasyon dilleri: İngilizce (varsayılan), İspanyolca ve Türkçe.
