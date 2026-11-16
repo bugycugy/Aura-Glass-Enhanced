@@ -456,6 +456,7 @@
       el.setAttribute("role", "dialog");
       el.setAttribute("aria-modal", "true");
       el.setAttribute("aria-label", "Modo escaparate");
+      el.setAttribute("tabindex", "-1");
       el.innerHTML = [
         '<div class="aura-sc-bg" aria-hidden="true"></div>',
         '<button class="aura-sc-close" type="button" aria-label="Salir del modo escaparate (Esc)">✕</button>',
@@ -522,8 +523,37 @@
       });
 
       el.addEventListener("keydown", (e) => {
-        if (e.key === "Escape") { e.stopPropagation(); this.toggle(false); }
-        if (e.key === " " && e.target === el) { e.preventDefault(); S.Player.togglePlay(); }
+        if (e.key === "Escape") { e.stopPropagation(); this.toggle(false); return; }
+        if (e.key === " " && e.target === el) { e.preventDefault(); S.Player.togglePlay(); return; }
+        if (e.key !== "Tab" || !this.open) return;
+
+        // Keep keyboard focus inside the modal showcase.
+        const focusable = [...el.querySelectorAll(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )].filter((node) =>
+          !node.hidden &&
+          node.getAttribute("aria-hidden") !== "true" &&
+          node.getClientRects().length > 0
+        );
+        if (!focusable.length) {
+          e.preventDefault();
+          el.focus();
+          return;
+        }
+
+        const first = focusable[0];
+        const last = focusable[focusable.length - 1];
+        const active = document.activeElement;
+        if (!el.contains(active)) {
+          e.preventDefault();
+          (e.shiftKey ? last : first).focus();
+        } else if (e.shiftKey && (active === first || active === el)) {
+          e.preventDefault();
+          last.focus();
+        } else if (!e.shiftKey && active === last) {
+          e.preventDefault();
+          first.focus();
+        }
       });
 
       document.body.appendChild(el);
