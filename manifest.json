@@ -1,12 +1,12 @@
 {
   "name": "Aura Glass",
-  "description": "Spotify için Liquid Glass teması: albüm kapağından beslenen bulanık arka plan, şarkıya göre renk değiştiren cam paneller, ayarlar, plak ve senkronize şarkı sözleriyle vitrin modu ve uyku zamanlayıcısı.",
+  "description": "A Liquid Glass theme for Spotify with artwork-driven colors, frosted-glass panels, a vinyl-inspired player, synchronized lyrics, showcase mode, and a sleep timer. Available in English, Spanish, and Turkish.",
   "preview": "preview.png",
   "readme": "README.md",
   "usercss": "user.css",
   "schemes": "color.ini",
   "include": [
-    "https://cdn.jsdelivr.net/gh/bugycugy/aura-glass-spicetify@main/theme.js"
+    "https://cdn.jsdelivr.net/gh/issacleral/aura-glass-spicetify@main/theme.js"
   ],
   "authors": [
     {
