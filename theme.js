@@ -17,13 +17,21 @@
 
   const STORE_KEY = "aura-glass:settings";
   const PRESETS = {
-    medianoche: { name: "Gece Yarısı", tint: [24, 26, 46], accent: "#8EA2FF" },
-    glaciar: { name: "Buzul", tint: [14, 40, 52], accent: "#7FE3F0" },
-    coral: { name: "Mercan", tint: [52, 22, 28], accent: "#FF8A7A" },
-    bosque: { name: "Orman", tint: [16, 40, 30], accent: "#7CE0A8" },
+    medianoche: { name: "midnight", tint: [24, 26, 46], accent: "#8EA2FF" },
+    glaciar: { name: "glacier", tint: [14, 40, 52], accent: "#7FE3F0" },
+    coral: { name: "coral", tint: [52, 22, 28], accent: "#FF8A7A" },
+    bosque: { name: "forest", tint: [16, 40, 30], accent: "#7CE0A8" },
   };
+  const LANGUAGES = {
+    en: { language:"Language",auto:"Album artwork",custom:"Custom",midnight:"Midnight",glacier:"Glacier",coral:"Coral",forest:"Forest",sleep:"Sleep timer",paused:"Sleep timer: playback paused",pauseIn:(m)=>"Sleep timer: pausing in "+m+" min",pauseAtEnd:"Sleep timer: pausing at the end of the track",closeShowcase:"Exit showcase mode (Esc)",showcase:"Showcase mode",trackPosition:"Track position",previous:"Previous",playPause:"Play or pause",next:"Next",color:"Color",glass:"Glass",effects:"Effects",blur:"Blur",opacity:"Opacity",radius:"Corner radius",brightness:"Background brightness",motion:"Background motion",equalizer:"Mini equalizer",spotlight:"Card spotlight",lowPower:"Low power mode",lowPowerHint:"Less blur and no animations",customColor:"Custom color",trackEnd:"At the end of the track",cancel:"Cancel",reset:"Reset to defaults",showcaseShortcut:"Showcase mode (Alt + S)",sleepHint:"Volume fades down before playback pauses, then returns to its previous level.",noLyrics:"No lyrics found for this track" },
+    es: { language:"Idioma",auto:"Portada del álbum",custom:"Personalizado",midnight:"Medianoche",glacier:"Glaciar",coral:"Coral",forest:"Bosque",sleep:"Temporizador de apagado",paused:"Temporizador: reproducción pausada",pauseIn:(m)=>"Temporizador: se pausará en "+m+" min",pauseAtEnd:"Temporizador: se pausará al acabar la canción",closeShowcase:"Salir del modo escaparate (Esc)",showcase:"Modo escaparate",trackPosition:"Posición de la canción",previous:"Anterior",playPause:"Reproducir o pausar",next:"Siguiente",color:"Color",glass:"Cristal",effects:"Efectos",blur:"Desenfoque",opacity:"Opacidad",radius:"Redondeo",brightness:"Brillo del fondo",motion:"Movimiento del fondo",equalizer:"Mini ecualizador",spotlight:"Foco de luz en tarjetas",lowPower:"Bajo consumo",lowPowerHint:"Menos desenfoque y sin animaciones",customColor:"Color personal",trackEnd:"Al acabar la canción",cancel:"Cancelar",reset:"Restablecer",showcaseShortcut:"Modo escaparate (Alt + S)",sleepHint:"Baja el volumen poco a poco antes de pausar y luego lo devuelve a su nivel.",noLyrics:"No hay letra para esta canción" },
+    tr: { language:"Dil",auto:t("auto"),custom:t("custom"),midnight:"Gece Yarısı",glacier:"Buzul",coral:"Mercan",forest:"Orman",sleep:t("sleep"),paused:t("paused"),pauseIn:(m)=>"Uyku zamanlayıcısı: "+m+" dakika sonra duraklatılacak",pauseAtEnd:t("pauseAtEnd"),closeShowcase:t("closeShowcase"),showcase:t("showcase"),trackPosition:t("trackPosition"),previous:t("previous"),playPause:t("playPause"),next:t("next"),color:t("color"),glass:t("glass"),effects:t("effects"),blur:t("blur"),opacity:t("opacity"),radius:t("radius"),brightness:t("brightness"),motion:t("motion"),equalizer:t("equalizer"),spotlight:t("spotlight"),lowPower:t("lowPower"),lowPowerHint:t("lowPowerHint"),customColor:t("customColor"),trackEnd:t("trackEnd"),cancel:t("cancel"),reset:t("reset"),showcaseShortcut:t("showcaseShortcut"),sleepHint:t("sleepHint"),noLyrics:t("noLyrics") }
+  };
+  const t = (key, ...args) => { const dict = LANGUAGES[settings.language] || LANGUAGES.en; const value = dict[key] ?? LANGUAGES.en[key] ?? key; return typeof value === "function" ? value(...args) : value; };
+
   const DEFAULTS = {
     color: "auto",          // auto | medianoche | glaciar | coral | bosque | custom
+    language: "en",
     custom: "#8EA2FF",
     blur: 36,               // px
     glass: 0.52,            // opacidad del cristal
@@ -302,8 +310,8 @@
       this.timer = setInterval(() => this.tick(), 500);
       this.notify();
       S.showNotification(mode === "time"
-        ? "Uyku zamanlayıcısı: " + minutes + " dakika sonra duraklatılacak"
-        : "Uyku zamanlayıcısı: şarkı bitince duraklatılacak");
+        ? t("pauseIn", minutes)
+        : t("pauseAtEnd"));
     },
 
     remainingMs() {
@@ -364,7 +372,7 @@
       this.cancel(true);
       // Devolvemos el último volumen elegido por el usuario cuando ya está en pausa.
       if (vol !== null) setTimeout(() => S.Player.setVolume(vol), 800);
-      S.showNotification("Uyku zamanlayıcısı: müzik duraklatıldı");
+      S.showNotification(t("paused"));
     },
 
     cancel(silent) {
@@ -382,7 +390,7 @@
 
     label() {
       if (!this.mode) return "Kapalı";
-      if (this.mode === "track") return "Şarkı bitince";
+      if (this.mode === "track") return t("trackEnd");
       const s = Math.ceil(this.remainingMs() / 1000);
       return "Quedan " + Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
     },
@@ -464,11 +472,11 @@
       el.className = "aura-showcase";
       el.setAttribute("role", "dialog");
       el.setAttribute("aria-modal", "true");
-      el.setAttribute("aria-label", "Vitrin modu");
+      el.setAttribute("aria-label", t("showcase"));
       el.setAttribute("tabindex", "-1");
       el.innerHTML = [
         '<div class="aura-sc-bg" aria-hidden="true"></div>',
-        '<button class="aura-sc-close" type="button" aria-label="Vitrin modundan çık (Esc)">✕</button>',
+        '<button class="aura-sc-close" type="button" aria-label=t("closeShowcase")>✕</button>',
         '<div class="aura-sc-clock" aria-hidden="true"></div>',
         '<div class="aura-sc-stage">',
         '  <div class="aura-sc-disc" aria-hidden="true">',
@@ -481,20 +489,20 @@
         '    <div class="aura-sc-lyrics" aria-live="off"></div>',
         '    <div class="aura-sc-progress">',
         '      <span class="aura-sc-time aura-sc-elapsed">0:00</span>',
-        '      <div class="aura-sc-bar" role="slider" tabindex="0" aria-label="Şarkı konumu" aria-valuemin="0">',
+        '      <div class="aura-sc-bar" role="slider" tabindex="0" aria-label=t("trackPosition") aria-valuemin="0">',
         '        <div class="aura-sc-fill"></div>',
         '      </div>',
         '      <span class="aura-sc-time aura-sc-total">0:00</span>',
         '    </div>',
         '    <div class="aura-sc-controls">',
-        '      <button type="button" class="aura-sc-btn" data-act="back" aria-label="Önceki">',
+        '      <button type="button" class="aura-sc-btn" data-act="back" aria-label=t("previous")>',
         '        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"/></svg>',
         '      </button>',
-        '      <button type="button" class="aura-sc-btn aura-sc-play" data-act="toggle" aria-label="Oynat veya duraklat">',
+        '      <button type="button" class="aura-sc-btn aura-sc-play" data-act="toggle" aria-label=t("playPause")>',
         '        <svg class="aura-i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg>',
         '        <svg class="aura-i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/></svg>',
         '      </button>',
-        '      <button type="button" class="aura-sc-btn" data-act="next" aria-label="Sonraki">',
+        '      <button type="button" class="aura-sc-btn" data-act="next" aria-label=t("next")>',
         '        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"/></svg>',
         '      </button>',
         '    </div>',
@@ -612,7 +620,7 @@
       if (!lyrics) {
         const p = document.createElement("p");
         p.className = "aura-sc-line is-note";
-        p.textContent = "Bu şarkının sözleri bulunamadı";
+        p.textContent = t("noLyrics");
         box.appendChild(p);
         return;
       }
@@ -741,13 +749,13 @@
     const same = (v) => v;
 
     // Colores
-    const colorOptions = [["auto", "Albüm kapağı"]].concat(
-      Object.entries(PRESETS).map(([k, p]) => [k, p.name]),
-      [["custom", "Özel"]]
+    const colorOptions = [["auto", t("auto")]].concat(
+      Object.entries(PRESETS).map(([k, p]) => [k, t(p.name)]),
+      [["custom", t("custom")]]
     );
-    const swatches = el("div", { class: "aura-swatches", role: "radiogroup", "aria-label": "Cam rengi" });
+    const swatches = el("div", { class: "aura-swatches", role: "radiogroup", "aria-label": t("color") });
     const picker = el("input", {
-      type: "color", value: settings.custom, "aria-label": "Özel renk",
+      type: "color", value: settings.custom, "aria-label": t("customColor"),
       oninput: (e) => {
         settings.custom = e.target.value;
         settings.color = "custom";
@@ -794,36 +802,39 @@
     const updateSleep = () => { sleepStatus.textContent = sleep.label(); };
     sleep.listeners.add(updateSleep);
     const sleepButtons = el("div", { class: "aura-chips" }, [15, 30, 45, 60].map((m) =>
-      el("button", { type: "button", class: "aura-chip", text: m + " dk", onclick: () => sleep.start("time", m) })
+      el("button", { type: "button", class: "aura-chip", text: m + (settings.language === "en" ? " min" : " min"), onclick: () => sleep.start("time", m) })
     ).concat([
-      el("button", { type: "button", class: "aura-chip", text: "Şarkı bitince", onclick: () => sleep.start("track") }),
-      el("button", { type: "button", class: "aura-chip aura-chip-quiet", text: "İptal et", onclick: () => sleep.cancel() }),
+      el("button", { type: "button", class: "aura-chip", text: t("trackEnd"), onclick: () => sleep.start("track") }),
+      el("button", { type: "button", class: "aura-chip aura-chip-quiet", text: t("cancel"), onclick: () => sleep.cancel() }),
     ]));
 
+    const languageSelect = el("select", { "aria-label": t("language"), onchange: (e) => { settings.language = e.target.value; saveSettings(); S.PopupModal.hide(); openStudio(); } }, ["en", "es", "tr"].map((code) => el("option", { value: code, text: ({ en: "English", es: "Español", tr: "Türkçe" })[code] })) );
+    languageSelect.value = settings.language;
     const content = el("div", { class: "aura-studio" }, [
-      el("section", {}, [el("h3", { text: "Renk" }), swatches, el("div", { class: "aura-row" }, [
-        el("label", { text: "Özel renk" }), picker,
+      el("section", {}, [el("h3", { text: t("language") }), languageSelect]),
+      el("section", {}, [el("h3", { text: t("color") }), swatches, el("div", { class: "aura-row" }, [
+        el("label", { text: t("customColor") }), picker,
       ])]),
       el("section", {}, [
-        el("h3", { text: "Cam" }),
-        rangeRow("Bulanıklık", "blur", 8, 60, 1, " px", same),
-        rangeRow("Saydamlık", "glass", 0.3, 0.85, 0.01, " %", pct),
-        rangeRow("Köşe yuvarlaklığı", "radius", 6, 32, 1, " px", same),
-        rangeRow("Arka plan parlaklığı", "brightness", 0.3, 1, 0.01, " %", pct),
+        el("h3", { text: t("glass") }),
+        rangeRow(t("blur"), "blur", 8, 60, 1, " px", same),
+        rangeRow(t("opacity"), "glass", 0.3, 0.85, 0.01, " %", pct),
+        rangeRow(t("radius"), "radius", 6, 32, 1, " px", same),
+        rangeRow(t("brightness"), "brightness", 0.3, 1, 0.01, " %", pct),
       ]),
       el("section", {}, [
-        el("h3", { text: "Efektler" }),
-        toggleRow("Arka plan hareketi", "motion"),
-        toggleRow("Mini ekolayzır", "equalizer"),
-        toggleRow("Kartlarda ışık odağı", "spotlight"),
-        toggleRow("Düşük güç tüketimi", "lowPower", "Daha az bulanıklık ve animasyonsuz görünüm"),
+        el("h3", { text: t("effects") }),
+        toggleRow(t("motion"), "motion"),
+        toggleRow(t("equalizer"), "equalizer"),
+        toggleRow(t("spotlight"), "spotlight"),
+        toggleRow(t("lowPower"), "lowPower", t("lowPowerHint")),
       ]),
-      el("section", {}, [el("h3", { text: "Uyku zamanlayıcısı" }), sleepButtons, sleepStatus,
-        el("p", { class: "aura-hint", text: "Müzik duraklatılmadan önce ses düzeyi yavaşça düşürülür, ardından önceki seviyesine döndürülür." })]),
+      el("section", {}, [el("h3", { text: t("sleep") }), sleepButtons, sleepStatus,
+        el("p", { class: "aura-hint", text: t("sleepHint") })]),
       el("section", { class: "aura-studio-footer" }, [
-        el("button", { type: "button", class: "aura-chip", text: "Vitrin modu (Alt + S)", onclick: () => { S.PopupModal.hide(); showcase.toggle(true); } }),
+        el("button", { type: "button", class: "aura-chip", text: t("showcaseShortcut"), onclick: () => { S.PopupModal.hide(); showcase.toggle(true); } }),
         el("button", {
-          type: "button", class: "aura-chip aura-chip-quiet", text: "Varsayılana döndür",
+          type: "button", class: "aura-chip aura-chip-quiet", text: t("reset"),
           onclick: () => { settings = Object.assign({}, DEFAULTS); saveSettings(); applySettings(); S.PopupModal.hide(); openStudio(); },
         }),
       ]),
@@ -845,7 +856,7 @@
   const ICON_STUDIO = '<svg role="img" height="16" width="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13c.9 0 1.4-.6 1.4-1.3 0-.4-.2-.7-.4-1-.2-.2-.3-.5-.3-.8 0-.7.6-1.2 1.3-1.2h1.4A3.1 3.1 0 0 0 14.5 7C14.5 3.9 11.6 1.5 8 1.5zM4.5 8.2a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm2-2.7a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm3 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm2 2.7a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>';
   const ICON_SHOWCASE = '<svg role="img" height="16" width="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zM8 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>';
   new S.Topbar.Button("Aura Glass ayarları", ICON_STUDIO, openStudio);
-  new S.Topbar.Button("Vitrin modu (Alt + S)", ICON_SHOWCASE, () => showcase.toggle(true));
+  new S.Topbar.Button(t("showcaseShortcut"), ICON_SHOWCASE, () => showcase.toggle(true));
 
   /* ------------------------------------------------------------------ */
   /* Arranque                                                             */
