@@ -19,7 +19,7 @@
   const PRESETS = {
     medianoche: { name: "Gece Yarısı", tint: [24, 26, 46], accent: "#8EA2FF" },
     glaciar: { name: "Buzul", tint: [14, 40, 52], accent: "#7FE3F0" },
-    coral: { name: "Coral", tint: [52, 22, 28], accent: "#FF8A7A" },
+    coral: { name: "Mercan", tint: [52, 22, 28], accent: "#FF8A7A" },
     bosque: { name: "Orman", tint: [16, 40, 30], accent: "#7CE0A8" },
   };
   const DEFAULTS = {
