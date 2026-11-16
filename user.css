@@ -493,7 +493,19 @@ body {
 
 /* ---------- Panel de ajustes (Studio) ------------------------------------ */
 
-.GenericModal:has(.aura-studio) {
+.GenericModal:has(.aura-language {
+  width: 100%;
+  min-height: 38px;
+  padding: 8px 12px;
+  border: 1px solid var(--spice-button);
+  border-radius: 8px;
+  background: var(--spice-card);
+  color: var(--spice-text);
+  font: inherit;
+  cursor: pointer;
+}
+
+.aura-studio) {
   background: rgba(var(--aura-tint), 0.78) !important;
   -webkit-backdrop-filter: blur(30px) saturate(1.5);
   backdrop-filter: blur(30px) saturate(1.5);
