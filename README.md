@@ -1,5 +1,7 @@
 # Aura Glass
 
+[🇹🇷 Türkçe](README.md) · [🇬🇧 English](README.en.md) · [🇪🇸 Español](README.es.md)
+
 **Spotify'a cam gibi bir görünüm.** Her şarkı, albüm kapağının renkleriyle uygulamanın tamamını yeniden renklendirir.
 
 Aura Glass, Apple'ın Liquid Glass tasarımından ilham alan bir [Spicetify](https://spicetify.app) temasıdır. Çalan parçanın kapak görseli arka plana dönüşür; paneller o görselin renklerini alan buzlu cam katmanlarına dönüşür. Müzik çalar, dönen bir plakla birlikte havada süzülen bir kapsül gibi görünür. Şarkı değiştiğinde tüm renkler de değişir.
