@@ -1,5 +1,5 @@
 // Aura Glass — Liquid Glass para Spotify (Spicetify)
-// Fondo con la portada, cristal teñido, panel de ajustes, modo escaparate
+// Kapak görselinden arka plan, renkli cam, ayarlar paneli ve vitrin modu
 // con letras sincronizadas, mini ecualizador, foco en tarjetas y temporizador.
 (function auraGlass() {
   const S = window.Spicetify;
@@ -17,10 +17,10 @@
 
   const STORE_KEY = "aura-glass:settings";
   const PRESETS = {
-    medianoche: { name: "Medianoche", tint: [24, 26, 46], accent: "#8EA2FF" },
-    glaciar: { name: "Glaciar", tint: [14, 40, 52], accent: "#7FE3F0" },
+    medianoche: { name: "Gece Yarısı", tint: [24, 26, 46], accent: "#8EA2FF" },
+    glaciar: { name: "Buzul", tint: [14, 40, 52], accent: "#7FE3F0" },
     coral: { name: "Coral", tint: [52, 22, 28], accent: "#FF8A7A" },
-    bosque: { name: "Bosque", tint: [16, 40, 30], accent: "#7CE0A8" },
+    bosque: { name: "Orman", tint: [16, 40, 30], accent: "#7CE0A8" },
   };
   const DEFAULTS = {
     color: "auto",          // auto | medianoche | glaciar | coral | bosque | custom
@@ -302,8 +302,8 @@
       this.timer = setInterval(() => this.tick(), 500);
       this.notify();
       S.showNotification(mode === "time"
-        ? "Temporizador: se pausará en " + minutes + " min"
-        : "Temporizador: se pausará al acabar la canción");
+        ? "Uyku zamanlayıcısı: " + minutes + " dakika sonra duraklatılacak"
+        : "Uyku zamanlayıcısı: şarkı bitince duraklatılacak");
     },
 
     remainingMs() {
@@ -364,7 +364,7 @@
       this.cancel(true);
       // Devolvemos el último volumen elegido por el usuario cuando ya está en pausa.
       if (vol !== null) setTimeout(() => S.Player.setVolume(vol), 800);
-      S.showNotification("Temporizador: reproducción pausada");
+      S.showNotification("Uyku zamanlayıcısı: müzik duraklatıldı");
     },
 
     cancel(silent) {
@@ -381,8 +381,8 @@
     },
 
     label() {
-      if (!this.mode) return "Apagado";
-      if (this.mode === "track") return "Al acabar la canción";
+      if (!this.mode) return "Kapalı";
+      if (this.mode === "track") return "Şarkı bitince";
       const s = Math.ceil(this.remainingMs() / 1000);
       return "Quedan " + Math.floor(s / 60) + ":" + String(s % 60).padStart(2, "0");
     },
@@ -464,11 +464,11 @@
       el.className = "aura-showcase";
       el.setAttribute("role", "dialog");
       el.setAttribute("aria-modal", "true");
-      el.setAttribute("aria-label", "Modo escaparate");
+      el.setAttribute("aria-label", "Vitrin modu");
       el.setAttribute("tabindex", "-1");
       el.innerHTML = [
         '<div class="aura-sc-bg" aria-hidden="true"></div>',
-        '<button class="aura-sc-close" type="button" aria-label="Salir del modo escaparate (Esc)">✕</button>',
+        '<button class="aura-sc-close" type="button" aria-label="Vitrin modundan çık (Esc)">✕</button>',
         '<div class="aura-sc-clock" aria-hidden="true"></div>',
         '<div class="aura-sc-stage">',
         '  <div class="aura-sc-disc" aria-hidden="true">',
@@ -481,20 +481,20 @@
         '    <div class="aura-sc-lyrics" aria-live="off"></div>',
         '    <div class="aura-sc-progress">',
         '      <span class="aura-sc-time aura-sc-elapsed">0:00</span>',
-        '      <div class="aura-sc-bar" role="slider" tabindex="0" aria-label="Posición de la canción" aria-valuemin="0">',
+        '      <div class="aura-sc-bar" role="slider" tabindex="0" aria-label="Şarkı konumu" aria-valuemin="0">',
         '        <div class="aura-sc-fill"></div>',
         '      </div>',
         '      <span class="aura-sc-time aura-sc-total">0:00</span>',
         '    </div>',
         '    <div class="aura-sc-controls">',
-        '      <button type="button" class="aura-sc-btn" data-act="back" aria-label="Anterior">',
+        '      <button type="button" class="aura-sc-btn" data-act="back" aria-label="Önceki">',
         '        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"/></svg>',
         '      </button>',
-        '      <button type="button" class="aura-sc-btn aura-sc-play" data-act="toggle" aria-label="Reproducir o pausar">',
+        '      <button type="button" class="aura-sc-btn aura-sc-play" data-act="toggle" aria-label="Oynat veya duraklat">',
         '        <svg class="aura-i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg>',
         '        <svg class="aura-i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/></svg>',
         '      </button>',
-        '      <button type="button" class="aura-sc-btn" data-act="next" aria-label="Siguiente">',
+        '      <button type="button" class="aura-sc-btn" data-act="next" aria-label="Sonraki">',
         '        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"/></svg>',
         '      </button>',
         '    </div>',
@@ -612,7 +612,7 @@
       if (!lyrics) {
         const p = document.createElement("p");
         p.className = "aura-sc-line is-note";
-        p.textContent = "Sin letra para esta canción";
+        p.textContent = "Bu şarkının sözleri bulunamadı";
         box.appendChild(p);
         return;
       }
@@ -646,7 +646,7 @@
       const bar = el.querySelector(".aura-sc-bar");
       bar.setAttribute("aria-valuemax", String(Math.round(dur / 1000)));
       bar.setAttribute("aria-valuenow", String(Math.round(pos / 1000)));
-      bar.setAttribute("aria-valuetext", fmt(pos) + " de " + fmt(dur));
+      bar.setAttribute("aria-valuetext", fmt(pos) + " / " + fmt(dur));
       el.classList.toggle("is-playing", S.Player.isPlaying());
 
       const now = new Date();
@@ -741,13 +741,13 @@
     const same = (v) => v;
 
     // Colores
-    const colorOptions = [["auto", "Portada"]].concat(
+    const colorOptions = [["auto", "Albüm kapağı"]].concat(
       Object.entries(PRESETS).map(([k, p]) => [k, p.name]),
-      [["custom", "Personal"]]
+      [["custom", "Özel"]]
     );
-    const swatches = el("div", { class: "aura-swatches", role: "radiogroup", "aria-label": "Color del cristal" });
+    const swatches = el("div", { class: "aura-swatches", role: "radiogroup", "aria-label": "Cam rengi" });
     const picker = el("input", {
-      type: "color", value: settings.custom, "aria-label": "Color personal",
+      type: "color", value: settings.custom, "aria-label": "Özel renk",
       oninput: (e) => {
         settings.custom = e.target.value;
         settings.color = "custom";
@@ -794,36 +794,36 @@
     const updateSleep = () => { sleepStatus.textContent = sleep.label(); };
     sleep.listeners.add(updateSleep);
     const sleepButtons = el("div", { class: "aura-chips" }, [15, 30, 45, 60].map((m) =>
-      el("button", { type: "button", class: "aura-chip", text: m + " min", onclick: () => sleep.start("time", m) })
+      el("button", { type: "button", class: "aura-chip", text: m + " dk", onclick: () => sleep.start("time", m) })
     ).concat([
-      el("button", { type: "button", class: "aura-chip", text: "Al acabar la canción", onclick: () => sleep.start("track") }),
-      el("button", { type: "button", class: "aura-chip aura-chip-quiet", text: "Cancelar", onclick: () => sleep.cancel() }),
+      el("button", { type: "button", class: "aura-chip", text: "Şarkı bitince", onclick: () => sleep.start("track") }),
+      el("button", { type: "button", class: "aura-chip aura-chip-quiet", text: "İptal et", onclick: () => sleep.cancel() }),
     ]));
 
     const content = el("div", { class: "aura-studio" }, [
-      el("section", {}, [el("h3", { text: "Color" }), swatches, el("div", { class: "aura-row" }, [
-        el("label", { text: "Color personal" }), picker,
+      el("section", {}, [el("h3", { text: "Renk" }), swatches, el("div", { class: "aura-row" }, [
+        el("label", { text: "Özel renk" }), picker,
       ])]),
       el("section", {}, [
-        el("h3", { text: "Cristal" }),
-        rangeRow("Desenfoque", "blur", 8, 60, 1, " px", same),
-        rangeRow("Opacidad", "glass", 0.3, 0.85, 0.01, " %", pct),
-        rangeRow("Redondeo", "radius", 6, 32, 1, " px", same),
-        rangeRow("Brillo del fondo", "brightness", 0.3, 1, 0.01, " %", pct),
+        el("h3", { text: "Cam" }),
+        rangeRow("Bulanıklık", "blur", 8, 60, 1, " px", same),
+        rangeRow("Saydamlık", "glass", 0.3, 0.85, 0.01, " %", pct),
+        rangeRow("Köşe yuvarlaklığı", "radius", 6, 32, 1, " px", same),
+        rangeRow("Arka plan parlaklığı", "brightness", 0.3, 1, 0.01, " %", pct),
       ]),
       el("section", {}, [
-        el("h3", { text: "Efectos" }),
-        toggleRow("Movimiento del fondo", "motion"),
-        toggleRow("Mini ecualizador", "equalizer"),
-        toggleRow("Foco de luz en tarjetas", "spotlight"),
-        toggleRow("Bajo consumo", "lowPower", "Menos desenfoque y sin animaciones"),
+        el("h3", { text: "Efektler" }),
+        toggleRow("Arka plan hareketi", "motion"),
+        toggleRow("Mini ekolayzır", "equalizer"),
+        toggleRow("Kartlarda ışık odağı", "spotlight"),
+        toggleRow("Düşük güç tüketimi", "lowPower", "Daha az bulanıklık ve animasyonsuz görünüm"),
       ]),
-      el("section", {}, [el("h3", { text: "Temporizador de apagado" }), sleepButtons, sleepStatus,
-        el("p", { class: "aura-hint", text: "Baja el volumen poco a poco antes de pausar y luego lo devuelve a su nivel." })]),
+      el("section", {}, [el("h3", { text: "Uyku zamanlayıcısı" }), sleepButtons, sleepStatus,
+        el("p", { class: "aura-hint", text: "Müzik duraklatılmadan önce ses düzeyi yavaşça düşürülür, ardından önceki seviyesine döndürülür." })]),
       el("section", { class: "aura-studio-footer" }, [
-        el("button", { type: "button", class: "aura-chip", text: "Modo escaparate (Alt + S)", onclick: () => { S.PopupModal.hide(); showcase.toggle(true); } }),
+        el("button", { type: "button", class: "aura-chip", text: "Vitrin modu (Alt + S)", onclick: () => { S.PopupModal.hide(); showcase.toggle(true); } }),
         el("button", {
-          type: "button", class: "aura-chip aura-chip-quiet", text: "Restablecer",
+          type: "button", class: "aura-chip aura-chip-quiet", text: "Varsayılana döndür",
           onclick: () => { settings = Object.assign({}, DEFAULTS); saveSettings(); applySettings(); S.PopupModal.hide(); openStudio(); },
         }),
       ]),
@@ -844,8 +844,8 @@
 
   const ICON_STUDIO = '<svg role="img" height="16" width="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5a6.5 6.5 0 1 0 0 13c.9 0 1.4-.6 1.4-1.3 0-.4-.2-.7-.4-1-.2-.2-.3-.5-.3-.8 0-.7.6-1.2 1.3-1.2h1.4A3.1 3.1 0 0 0 14.5 7C14.5 3.9 11.6 1.5 8 1.5zM4.5 8.2a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm2-2.7a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm3 0a1 1 0 1 1 0-2 1 1 0 0 1 0 2zm2 2.7a1 1 0 1 1 0-2 1 1 0 0 1 0 2z"/></svg>';
   const ICON_SHOWCASE = '<svg role="img" height="16" width="16" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zm0 1.5a5.5 5.5 0 1 1 0 11 5.5 5.5 0 0 1 0-11zM8 6a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/></svg>';
-  new S.Topbar.Button("Ajustes de Aura Glass", ICON_STUDIO, openStudio);
-  new S.Topbar.Button("Modo escaparate (Alt + S)", ICON_SHOWCASE, () => showcase.toggle(true));
+  new S.Topbar.Button("Aura Glass ayarları", ICON_STUDIO, openStudio);
+  new S.Topbar.Button("Vitrin modu (Alt + S)", ICON_SHOWCASE, () => showcase.toggle(true));
 
   /* ------------------------------------------------------------------ */
   /* Arranque                                                             */
