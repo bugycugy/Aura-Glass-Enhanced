@@ -274,15 +274,20 @@
   /* ------------------------------------------------------------------ */
 
   const FADE_MS = 30000;
+  const VOLUME_CHANGE_EPSILON = 0.025;
   const sleep = {
     mode: null,          // "time" | "track"
     endAt: 0,
-    startVolume: null,
+    startVolume: null,   // Son kullanıcı tarafından seçilen seviye; iptal sonrası buna döneriz.
+    fadeAnchorVolume: null,
+    fadeAnchorFactor: 1,
+    lastAppliedVolume: null,
     timer: 0,
     listeners: new Set(),
 
     start(mode, minutes) {
-      this.cancel(true);
+      // Önceki zamanlayıcı sesi kısmışsa yeni zamanlayıcıdan önce geri yükle.
+      this.cancel(false);
       this.mode = mode;
       this.endAt = mode === "time" ? Date.now() + minutes * 60000 : 0;
       this.timer = setInterval(() => this.tick(), 500);
@@ -302,9 +307,31 @@
       const left = this.remainingMs();
       const fadeWindow = this.mode === "track" ? 6000 : FADE_MS;
       if (left <= fadeWindow && S.Player.isPlaying()) {
-        if (this.startVolume === null) this.startVolume = S.Player.getVolume();
-        S.Player.setVolume(this.startVolume * (left / fadeWindow));
+        const currentVolume = S.Player.getVolume();
+        const factor = clamp(left / fadeWindow, 0, 1);
+
+        if (this.startVolume === null) {
+          this.startVolume = currentVolume;
+          this.fadeAnchorVolume = currentVolume;
+          this.fadeAnchorFactor = factor || 1;
+        } else if (
+          this.lastAppliedVolume !== null &&
+          Math.abs(currentVolume - this.lastAppliedVolume) > VOLUME_CHANGE_EPSILON
+        ) {
+          // Kullanıcı sesi elle değiştirdi: yeni değeri koru ve kalan fade'i buradan sürdür.
+          this.startVolume = currentVolume;
+          this.fadeAnchorVolume = currentVolume;
+          this.fadeAnchorFactor = factor || 1;
+        }
+
+        const fadeRatio = this.fadeAnchorFactor > 0
+          ? factor / this.fadeAnchorFactor
+          : 0;
+        const nextVolume = clamp(this.fadeAnchorVolume * fadeRatio, 0, 1);
+        S.Player.setVolume(nextVolume);
+        this.lastAppliedVolume = nextVolume;
       }
+
       if (this.mode === "time" && left <= 0) this.finish();
       this.notify();
     },
@@ -318,7 +345,7 @@
       S.Player.pause();
       const vol = this.startVolume;
       this.cancel(true);
-      // Devolvemos el volumen cuando ya está en pausa.
+      // Devolvemos el último volumen elegido por el usuario cuando ya está en pausa.
       if (vol !== null) setTimeout(() => S.Player.setVolume(vol), 800);
       S.showNotification("Temporizador: reproducción pausada");
     },
@@ -329,6 +356,9 @@
       this.mode = null;
       this.endAt = 0;
       this.startVolume = null;
+      this.fadeAnchorVolume = null;
+      this.fadeAnchorFactor = 1;
+      this.lastAppliedVolume = null;
       this.timer = 0;
       this.notify();
     },
