@@ -1,92 +1,92 @@
 # Aura Glass
 
-**Spotify, pero de cristal.** Cada canción tiñe la app entera con los colores de su portada.
+**Spotify'a cam gibi bir görünüm.** Her şarkı, albüm kapağının renkleriyle uygulamanın tamamını yeniden renklendirir.
 
-Aura Glass es un tema para [Spicetify](https://spicetify.app) inspirado en el Liquid Glass de Apple. La portada de lo que suena se convierte en el fondo, los paneles son de cristal esmerilado que toma su color y el reproductor flota como una cápsula con un disco que gira. Pones otra canción y todo cambia de color con ella.
+Aura Glass, Apple'ın Liquid Glass tasarımından ilham alan bir [Spicetify](https://spicetify.app) temasıdır. Çalan parçanın kapak görseli arka plana dönüşür; paneller o görselin renklerini alan buzlu cam katmanlarına dönüşür. Müzik çalar, dönen bir plakla birlikte havada süzülen bir kapsül gibi görünür. Şarkı değiştiğinde tüm renkler de değişir.
 
 ![Aura Glass](preview.png)
 
-## Por qué te va a gustar
+## Neden seveceksin?
 
-- **Cambia con tu música.** El fondo, el tinte del cristal, los botones, la barra de progreso y el volumen se adaptan a la portada de cada canción. Nunca se ve igual dos veces.
-- **Un reproductor con alma de vinilo.** La portada es un disco que gira mientras suena y se para cuando pausas.
-- **Modo escaparate para dejarlo puesto.** Pulsa `Alt + S` y Spotify se convierte en una pantalla para el salón o el segundo monitor: vinilo girando, reloj, controles y la **letra sincronizada**, que se enfoca verso a verso. Haz clic en cualquier línea y la canción salta a ese momento.
-- **Lo ajustas sin tocar código.** Un panel con el color del cristal (el de la portada, 4 paletas o el tuyo), desenfoque, opacidad, redondeo y brillo. Los cambios se ven al momento y se guardan.
-- **Temporizador para dormirte con música.** Elige 15, 30, 45 o 60 minutos, o "al acabar la canción". El volumen baja poco a poco antes de pausar, sin cortes bruscos, y luego vuelve a su nivel.
-- **Bonito y legible.** El cristal va en las barras y los paneles, nunca encima de tus listas. Si la portada da un color poco legible, el tema lo aclara solo para que siempre se lea bien.
-- **No se come tu ordenador.** Las animaciones se paran cuando Spotify está en segundo plano, y el modo "Bajo consumo" reduce el desenfoque y quita las animaciones.
-- **Accesible.** Respeta "reducir transparencia", "más contraste" y "reducir movimiento" de tu sistema, y todo el panel y el escaparate se manejan con teclado.
+- **Müziğinle birlikte değişir.** Arka plan, camın tonu, düğmeler, ilerleme çubuğu ve ses seviyesi her şarkının kapak görseline uyum sağlar.
+- **Plak ruhunu taşıyan bir müzik çalar.** Albüm kapağı bir plak gibi döner; müzik duraklatıldığında o da durur.
+- **Vitrin modu.** `Alt + S` kısayoluyla Spotify'ı salonunda veya ikinci monitöründe kullanabileceğin tam ekran bir müzik ekranına dönüştürür. Dönen plak, saat, oynatma kontrolleri ve senkronize şarkı sözleri görünür. Etkin dize vurgulanır; herhangi bir dizeye tıklayarak şarkıda o ana atlayabilirsin.
+- **Kodla uğraşmadan kişiselleştir.** Cam rengini (kapak görselinden, dört hazır paletten veya kendi renginden), bulanıklığı, saydamlığı, köşe yuvarlaklığını ve parlaklığı ayarlar panelinden değiştirebilirsin. Değişiklikler anında uygulanır ve kaydedilir.
+- **Uyku zamanlayıcısı.** 15, 30, 45 veya 60 dakika sonrasına ya da şarkının bitimine zamanlayabilirsin. Müzik duraklatılmadan önce ses yavaşça azaltılır; ardından önceki seviyesine döndürülür.
+- **Şık ve okunaklı.** Cam efekti listelerin üzerine binmez; kenar çubuklarında ve panellerde kullanılır. Kapak görselinin rengi metni okumayı zorlaştırırsa tema okunabilirliği korumak için rengi otomatik olarak ayarlar.
+- **Bilgisayarını yormaz.** Spotify arka plandayken animasyonlar durur. Düşük güç tüketimi modu bulanıklığı azaltır ve animasyonları kapatır.
+- **Erişilebilir.** İşletim sisteminin saydamlığı azaltma, yüksek karşıtlık ve hareketi azaltma tercihlerini dikkate alır. Ayarlar paneli ve vitrin modu klavyeyle kullanılabilir.
 
-## Así se ve
+## Görünüm
 
-### El reproductor se tiñe con cada portada
+### Her kapak görseliyle renk değiştiren müzik çalar
 
-Botones, tiempos, barra de progreso, volumen y el botón de play cambian de color con la portada que suena. Aquí, el mismo reproductor con cuatro colores distintos:
+Düğmeler, süre göstergeleri, ilerleme çubuğu, ses seviyesi ve oynat düğmesi çalan parçanın kapak görseline göre renk değiştirir. Aynı müzik çaların dört farklı görünümü:
 
-![Reproductor con cuatro colores](capturas/colores.png)
+![Dört farklı renkte müzik çalar](capturas/colores.png)
 
-### La portada es un disco que gira
+### Dönen plak görünümündeki kapak
 
-Redonda, con el agujero central de un vinilo. Gira mientras suena y se para al pausar.
+Ortası delikli yuvarlak bir plak görünümü. Müzik çalarken döner, duraklatıldığında durur.
 
-![Portada en forma de disco girando](capturas/disco.gif)
+![Plak görünümündeki kapak](capturas/disco.gif)
 
-### Modo escaparate (`Alt + S`)
+### Vitrin modu (`Alt + S`)
 
-Pantalla completa con la portada, el vinilo girando, el reloj y la letra sincronizada: lo que ya sonó se atenúa, el verso actual brilla y lo que viene espera desenfocado.
+Kapak görseli, dönen plak, saat ve senkronize şarkı sözleriyle tam ekran görünüm. Önceden çalınan dizeler solar, etkin dize belirginleşir, sıradaki dizeler bulanık kalır.
 
-![Modo escaparate](capturas/escaparate.png)
+![Vitrin modu](capturas/escaparate.png)
 
-### Panel de ajustes
+### Ayarlar paneli
 
-Color del cristal, desenfoque, opacidad, redondeo, brillo, efectos y temporizador de apagado. Sin tocar código.
+Cam rengi, bulanıklık, saydamlık, köşe yuvarlaklığı, parlaklık, efektler ve uyku zamanlayıcısı. Kod değiştirmen gerekmez.
 
-![Panel de ajustes](capturas/ajustes.png)
+![Ayarlar paneli](capturas/ajustes.png)
 
-## Instalación
+## Kurulum
 
-### Desde el Marketplace (recomendado)
+### Marketplace üzerinden (önerilen)
 
-1. Abre Spotify con Spicetify y entra en el **Marketplace** (el icono del carrito).
-2. Ve a **Temas**, busca **Aura Glass** y pulsa **Instalar**.
+1. Spicetify ile Spotify'ı aç ve **Marketplace** bölümüne (alışveriş sepeti simgesi) gir.
+2. **Temalar** sekmesinde **Aura Glass** temasını bul ve **Yükle**'ye tıkla.
 
-Si el Marketplace te pide poner `current_theme` en `marketplace`, ejecuta esto y vuelve a abrir Spotify:
+Marketplace senden `current_theme` değerini `marketplace` olarak ayarlamanı isterse şu komutları çalıştır ve Spotify'ı yeniden aç:
 
 ```bash
 spicetify config current_theme marketplace
 spicetify apply
 ```
 
-### A mano
+### Manuel kurulum
 
-1. Copia esta carpeta en la carpeta de temas de Spicetify, con el nombre `AuraGlass`:
-   - Windows: `%APPDATA%\spicetify\Themes\AuraGlass`
+1. Bu klasörü Spicetify tema klasörüne `AuraGlass` adıyla kopyala:
+   - Windows: `%APPDATA%\\spicetify\\Themes\\AuraGlass`
    - macOS / Linux: `~/.config/spicetify/Themes/AuraGlass`
-2. Ejecuta:
+2. Şu komutları çalıştır:
 
 ```bash
-spicetify config current_theme AuraGlass color_scheme Noche inject_css 1 replace_colors 1 inject_theme_js 1
+spicetify config current_theme AuraGlass color_scheme Gece inject_css 1 replace_colors 1 inject_theme_js 1
 spicetify apply
 ```
 
-## Cómo se usa
+## Kullanım
 
-| Para… | Haz… |
+| İşlem | Nasıl yapılır? |
 | --- | --- |
-| Abrir los ajustes | Icono de paleta, arriba a la izquierda |
-| Entrar en el modo escaparate | `Alt + S` o el icono de disco, arriba a la izquierda |
-| Salir del modo escaparate | `Esc` o la ✕ |
-| Saltar a un verso | Clic en la línea de la letra (en el escaparate) |
-| Adelantar o retroceder | Flechas sobre la barra de progreso (`Mayús` para 30 s) |
-| Programar el apagado | Ajustes → Temporizador de apagado |
+| Ayarları aç | Sol üstteki palet simgesine tıkla |
+| Vitrin modunu aç | `Alt + S` tuşlarına bas veya sol üstteki plak simgesine tıkla |
+| Vitrin modundan çık | `Esc` tuşuna bas veya ✕ düğmesine tıkla |
+| Bir dizeye atla | Vitrin modunda şarkı sözü satırına tıkla |
+| İleri veya geri sar | İlerleme çubuğunda ok tuşlarını kullan (`Shift` ile 30 saniye) |
+| Zamanlayıcı kur | Ayarlar → Uyku zamanlayıcısı |
 
-## Requisitos
+## Gereksinimler
 
-- Spotify de escritorio. La versión de Microsoft Store no admite Spicetify.
+- Spicetify destekleyen masaüstü Spotify sürümü. Microsoft Store sürümü Spicetify'ı desteklemez.
 - Spicetify 2.x.
 
-Probado con Spotify 1.3.8 y Spicetify 2.46.4 en Windows 11.
+Windows 11 üzerinde Spotify 1.3.8 ve Spicetify 2.46.4 ile test edilmiştir.
 
-## Licencia
+## Lisans
 
 MIT
