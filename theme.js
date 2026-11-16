@@ -386,27 +386,50 @@
   /* ------------------------------------------------------------------ */
 
   const lyricsCache = new Map();
+  const lyricsRequests = new Map();
+  const LYRICS_CACHE_LIMIT = 100;
+
   async function fetchLyrics(uri) {
     if (lyricsCache.has(uri)) return lyricsCache.get(uri);
-    const id = (uri || "").split(":")[2];
-    let result = null;
-    if (id) {
+    if (lyricsRequests.has(uri)) return lyricsRequests.get(uri);
+
+    // Solo aceptamos URIs de pistas válidas; entradas inválidas no se cachean.
+    const match = /^spotify:track:([a-zA-Z0-9]+)$/.exec(uri || "");
+    if (!match) return null;
+
+    const request = (async () => {
       try {
         const res = await S.CosmosAsync.get(
-          "https://spclient.wg.spotify.com/color-lyrics/v2/track/" + id +
+          "https://spclient.wg.spotify.com/color-lyrics/v2/track/" + match[1] +
           "?format=json&vocalRemoval=false&market=from_token"
         );
         const l = res && res.lyrics;
-        if (l && Array.isArray(l.lines)) {
-          const lines = l.lines
-            .map((x) => ({ t: Number(x.startTimeMs) || 0, text: (x.words || "").trim() }))
-            .filter((x) => x.text && x.text !== "♪");
-          if (lines.length) result = { synced: l.syncType === "LINE_SYNCED", lines };
+        if (!l || !Array.isArray(l.lines)) return null;
+
+        const lines = l.lines
+          .map((x) => ({ t: Number(x.startTimeMs) || 0, text: (x.words || "").trim() }))
+          .filter((x) => x.text && x.text !== "♪");
+        if (!lines.length) return null;
+
+        const result = { synced: l.syncType === "LINE_SYNCED", lines };
+        // Cacheamos únicamente respuestas útiles. Errores y ausencia de letras
+        // no se guardan, así una consulta posterior puede recuperarse.
+        if (lyricsCache.size >= LYRICS_CACHE_LIMIT) {
+          lyricsCache.delete(lyricsCache.keys().next().value);
         }
-      } catch (e) { /* sin letra */ }
+        lyricsCache.set(uri, result);
+        return result;
+      } catch (e) {
+        return null;
+      }
+    })();
+
+    lyricsRequests.set(uri, request);
+    try {
+      return await request;
+    } finally {
+      lyricsRequests.delete(uri);
     }
-    lyricsCache.set(uri, result);
-    return result;
   }
 
   /* ------------------------------------------------------------------ */
