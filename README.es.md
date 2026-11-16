@@ -67,7 +67,7 @@ spicetify apply
 2. Ejecuta:
 
 ```bash
-spicetify config current_theme AuraGlass color_scheme Noche inject_css 1 replace_colors 1 inject_theme_js 1
+spicetify config current_theme AuraGlass color_scheme Gece inject_css 1 replace_colors 1 inject_theme_js 1
 spicetify apply
 ```
 
