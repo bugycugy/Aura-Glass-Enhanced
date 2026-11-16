@@ -1,6 +1,6 @@
 # Aura Glass
 
-[🇹🇷 Türkçe](README.md) · [🇬🇧 English](README.en.md) · [🇪🇸 Español](README.es.md)
+[🇬🇧 English](README.en.md) · [🇪🇸 Español](README.md) · [🇹🇷 Türkçe](README.tr.md)
 
 **Spotify, with a glass-like look.** Every song transforms the app with colors drawn from its album artwork.
 
