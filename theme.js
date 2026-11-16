@@ -52,6 +52,7 @@
     }
   }
   let settings = loadSettings();
+  if (!LANGUAGES[settings.language]) settings.language = "en";
 
   function saveSettings() {
     try { S.LocalStorage.set(STORE_KEY, JSON.stringify(settings)); } catch (e) { /* sin almacenamiento */ }
@@ -476,7 +477,7 @@
       el.setAttribute("tabindex", "-1");
       el.innerHTML = [
         '<div class="aura-sc-bg" aria-hidden="true"></div>',
-        '<button class="aura-sc-close" type="button" aria-label=t("closeShowcase")>✕</button>',
+        '<button class="aura-sc-close" type="button" aria-label="' + t("closeShowcase") + '">✕</button>',
         '<div class="aura-sc-clock" aria-hidden="true"></div>',
         '<div class="aura-sc-stage">',
         '  <div class="aura-sc-disc" aria-hidden="true">',
@@ -489,20 +490,20 @@
         '    <div class="aura-sc-lyrics" aria-live="off"></div>',
         '    <div class="aura-sc-progress">',
         '      <span class="aura-sc-time aura-sc-elapsed">0:00</span>',
-        '      <div class="aura-sc-bar" role="slider" tabindex="0" aria-label=t("trackPosition") aria-valuemin="0">',
+        '      <div class="aura-sc-bar" role="slider" tabindex="0" aria-label="' + t("trackPosition") + '" aria-valuemin="0">',
         '        <div class="aura-sc-fill"></div>',
         '      </div>',
         '      <span class="aura-sc-time aura-sc-total">0:00</span>',
         '    </div>',
         '    <div class="aura-sc-controls">',
-        '      <button type="button" class="aura-sc-btn" data-act="back" aria-label=t("previous")>',
+        '      <button type="button" class="aura-sc-btn" data-act="back" aria-label="' + t("previous") + '">',
         '        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3.3 1a.7.7 0 0 1 .7.7v5.15l9.95-5.744a.7.7 0 0 1 1.05.606v12.575a.7.7 0 0 1-1.05.607L4 9.149V14.3a.7.7 0 0 1-.7.7H1.7a.7.7 0 0 1-.7-.7V1.7a.7.7 0 0 1 .7-.7h1.6z"/></svg>',
         '      </button>',
-        '      <button type="button" class="aura-sc-btn aura-sc-play" data-act="toggle" aria-label=t("playPause")>',
+        '      <button type="button" class="aura-sc-btn aura-sc-play" data-act="toggle" aria-label="' + t("playPause") + '">',
         '        <svg class="aura-i-play" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 1.713a.7.7 0 0 1 1.05-.607l10.89 6.288a.7.7 0 0 1 0 1.212L4.05 14.894A.7.7 0 0 1 3 14.288V1.713z"/></svg>',
         '        <svg class="aura-i-pause" viewBox="0 0 16 16" aria-hidden="true"><path d="M2.7 1a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7H2.7zm8 0a.7.7 0 0 0-.7.7v12.6a.7.7 0 0 0 .7.7h2.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-2.6z"/></svg>',
         '      </button>',
-        '      <button type="button" class="aura-sc-btn" data-act="next" aria-label=t("next")>',
+        '      <button type="button" class="aura-sc-btn" data-act="next" aria-label="' + t("next") + '">',
         '        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M12.7 1a.7.7 0 0 0-.7.7v5.15L2.05 1.107A.7.7 0 0 0 1 1.712v12.575a.7.7 0 0 0 1.05.607L12 9.149V14.3a.7.7 0 0 0 .7.7h1.6a.7.7 0 0 0 .7-.7V1.7a.7.7 0 0 0-.7-.7h-1.6z"/></svg>',
         '      </button>',
         '    </div>',
@@ -835,7 +836,7 @@
         el("button", { type: "button", class: "aura-chip", text: t("showcaseShortcut"), onclick: () => { S.PopupModal.hide(); showcase.toggle(true); } }),
         el("button", {
           type: "button", class: "aura-chip aura-chip-quiet", text: t("reset"),
-          onclick: () => { settings = Object.assign({}, DEFAULTS); saveSettings(); applySettings(); S.PopupModal.hide(); openStudio(); },
+          onclick: () => { const language = settings.language; settings = Object.assign({}, DEFAULTS, { language }); saveSettings(); applySettings(); S.PopupModal.hide(); openStudio(); },
         }),
       ]),
     ]);
