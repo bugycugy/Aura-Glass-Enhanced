@@ -20,7 +20,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 git push origin main
 
-$repo = "issacleral/aura-glass-spicetify"
+$repo = "bugycugy/aura-glass-spicetify"
 $archivos = @("manifest.json", "user.css", "color.ini", "theme.js", "README.md", "preview.png") +
   (Get-ChildItem -LiteralPath "$PSScriptRoot\capturas" -Include *.png, *.gif -ErrorAction SilentlyContinue |
     ForEach-Object { "capturas/" + $_.Name })
