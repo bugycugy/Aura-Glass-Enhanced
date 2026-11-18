@@ -1,9 +1,9 @@
-# Aura Glass — English documentation
+# Aura Glass — Enhanced Edition
 
-The default English documentation is now [README.md](README.md).
+The default English documentation is [README.md](README.md).
 
 Available translations:
 - [Español](README.es.md)
 - [Türkçe](README.tr.md)
 
-To contribute another language, see the **Contributing a translation** section in [README.md](README.md).
+For project origins and credits, see [ATTRIBUTION.md](ATTRIBUTION.md).
