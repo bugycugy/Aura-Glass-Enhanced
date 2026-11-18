@@ -1,12 +1,12 @@
 {
-  "name": "Aura Glass",
-  "description": "A Liquid Glass theme for Spotify with artwork-driven colors, frosted-glass panels, a vinyl-inspired player, synchronized lyrics, showcase mode, and a sleep timer. Available in English, Spanish, and Turkish.",
+  "name": "Aura Glass — Enhanced Edition",
+  "description": "A community-maintained enhanced fork of Aura Glass by issacleral. Liquid Glass styling, artwork-driven colors, vinyl-inspired player, synchronized lyrics, showcase mode, sleep timer, and English, Spanish, and Turkish UI.",
   "preview": "preview.png",
   "readme": "README.md",
   "usercss": "user.css",
   "schemes": "color.ini",
   "include": [
-    "https://cdn.jsdelivr.net/gh/issacleral/aura-glass-spicetify@main/theme.js"
+    "https://cdn.jsdelivr.net/gh/bugycugy/aura-glass-spicetify@main/theme.js"
   ],
   "authors": [
     {
