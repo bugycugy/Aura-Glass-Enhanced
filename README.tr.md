@@ -1,4 +1,4 @@
-# Aura Glass
+# Aura Glass — Enhanced Edition
 
 [🇬🇧 English](README.md) · [🇪🇸 Español](README.es.md) · [🇹🇷 Türkçe](README.tr.md)
 
@@ -89,9 +89,9 @@ spicetify apply
 
 Windows 11 üzerinde Spotify 1.3.8 ve Spicetify 2.46.4 ile test edilmiştir.
 
-## Lisans
+## Katkı sahipleri ve lisans
 
-MIT
+[issacleral tarafından geliştirilen Aura Glass](https://github.com/issacleral/aura-glass-spicetify) temel alınmıştır. Bu geliştirilmiş sürüm bağımsız olarak sürdürülür. Orijinal telif bildirimi ve MIT lisansı korunmuştur; [ATTRIBUTION.md](ATTRIBUTION.md) ve [LICENSE](LICENSE) dosyalarına bak.
 
 
 ## Çeviri katkısı nasıl yapılır?
