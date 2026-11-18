@@ -1,8 +1,10 @@
-# Aura Glass
+# Aura Glass — Enhanced Edition
 
 [🇬🇧 English](README.md) · [🇪🇸 Español](README.es.md) · [🇹🇷 Türkçe](README.tr.md)
 
 **Spotify, pero de cristal.** Cada canción tiñe la app entera con los colores de su portada.
+
+Aura Glass — Enhanced Edition es una continuación comunitaria de [Aura Glass, creado por issacleral](https://github.com/issacleral/aura-glass-spicetify). Esta versión mantiene la licencia MIT original e incorpora correcciones, mejoras y traducciones independientes. Consulta [Atribución](ATTRIBUTION.md).
 
 Aura Glass es un tema para [Spicetify](https://spicetify.app) inspirado en el Liquid Glass de Apple. La portada de lo que suena se convierte en el fondo, los paneles son de cristal esmerilado que toma su color y el reproductor flota como una cápsula con un disco que gira. Pones otra canción y todo cambia de color con ella.
 
@@ -89,9 +91,9 @@ spicetify apply
 
 Probado con Spotify 1.3.8 y Spicetify 2.46.4 en Windows 11.
 
-## Licencia
+## Créditos y licencia
 
-MIT
+Basado en [Aura Glass de issacleral](https://github.com/issacleral/aura-glass-spicetify). Esta versión mejorada se mantiene de forma independiente. Se conserva el aviso de copyright y la licencia MIT originales; consulta [ATTRIBUTION.md](ATTRIBUTION.md) y [LICENSE](LICENSE).
 
 
 ## Cómo añadir una traducción
