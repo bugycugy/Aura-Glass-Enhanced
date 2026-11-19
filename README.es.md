@@ -49,19 +49,11 @@ Color del cristal, desenfoque, opacidad, redondeo, brillo, efectos y temporizado
 
 ## Instalación
 
-### Desde el Marketplace (recomendado)
+### Desde el Marketplace
 
-1. Abre Spotify con Spicetify y entra en el **Marketplace** (el icono del carrito).
-2. Ve a **Temas**, busca **Aura Glass** y pulsa **Instalar**.
+Aura Glass — Enhanced Edition todavía no está publicado en el Spicetify Marketplace. Hasta que se apruebe y aparezca allí, utiliza la instalación manual que encontrarás abajo.
 
-Si el Marketplace te pide poner `current_theme` en `marketplace`, ejecuta esto y vuelve a abrir Spotify:
-
-```bash
-spicetify config current_theme marketplace
-spicetify apply
-```
-
-### A mano
+### Instalación manual
 
 1. Copia esta carpeta en la carpeta de temas de Spicetify, con el nombre `AuraGlass`:
    - Windows: `%APPDATA%\spicetify\Themes\AuraGlass`
