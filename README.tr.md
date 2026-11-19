@@ -49,17 +49,9 @@ Cam rengi, bulanıklık, saydamlık, köşe yuvarlaklığı, parlaklık, efektle
 
 ## Kurulum
 
-### Marketplace üzerinden (önerilen)
+### Marketplace üzerinden
 
-1. Spicetify ile Spotify'ı aç ve **Marketplace** bölümüne (alışveriş sepeti simgesi) gir.
-2. **Temalar** sekmesinde **Aura Glass** temasını bul ve **Yükle**'ye tıkla.
-
-Marketplace senden `current_theme` değerini `marketplace` olarak ayarlamanı isterse şu komutları çalıştır ve Spotify'ı yeniden aç:
-
-```bash
-spicetify config current_theme marketplace
-spicetify apply
-```
+Aura Glass — Enhanced Edition henüz Spicetify Marketplace'te yayımlanmadı. Onaylanıp listelenene kadar aşağıdaki manuel kurulum yöntemini kullan.
 
 ### Manuel kurulum
 
