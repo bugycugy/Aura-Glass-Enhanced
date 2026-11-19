@@ -661,8 +661,9 @@
       const now = new Date();
       if (now.getMinutes() !== this.minute) {
         this.minute = now.getMinutes();
+        const clockLocale = ({ en: "en-US", es: "es-ES", tr: "tr-TR" })[settings.language] || "en-US";
         el.querySelector(".aura-sc-clock").textContent =
-          now.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+          now.toLocaleTimeString(clockLocale, { hour: "2-digit", minute: "2-digit" });
       }
 
       if (!this.lyrics || !this.lyrics.synced) return;
@@ -809,7 +810,7 @@
       el("button", { type: "button", class: "aura-chip aura-chip-quiet", text: t("cancel"), onclick: () => sleep.cancel() }),
     ]));
 
-    const languageSelect = el("select", { "aria-label": t("language"), onchange: (e) => { settings.language = e.target.value; saveSettings(); S.PopupModal.hide(); openStudio(); } }, ["en", "es", "tr"].map((code) => el("option", { value: code, text: ({ en: "English", es: "Español", tr: "Türkçe" })[code] })) );
+    const languageSelect = el("select", { class: "aura-language", "aria-label": t("language"), onchange: (e) => { settings.language = e.target.value; saveSettings(); S.PopupModal.hide(); openStudio(); } }, ["en", "es", "tr"].map((code) => el("option", { value: code, text: ({ en: "English", es: "Español", tr: "Türkçe" })[code] })) );
     languageSelect.value = settings.language;
     const content = el("div", { class: "aura-studio" }, [
       el("section", {}, [el("h3", { text: t("language") }), languageSelect]),
