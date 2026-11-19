@@ -4,6 +4,8 @@
 
 **Spotify'a cam gibi bir görünüm.** Her şarkı, albüm kapağının renkleriyle uygulamanın tamamını yeniden renklendirir.
 
+Aura Glass — Enhanced Edition, [issacleral tarafından geliştirilen Aura Glass'ın](https://github.com/issacleral/aura-glass-spicetify) topluluk tarafından sürdürülen geliştirilmiş sürümüdür. Orijinal MIT lisansını korur; bağımsız hata düzeltmeleri, iyileştirmeler ve çeviriler içerir. Ayrıntılar için [Atıf](ATTRIBUTION.md) dosyasına bak.
+
 Aura Glass, Apple'ın Liquid Glass tasarımından ilham alan bir [Spicetify](https://spicetify.app) temasıdır. Çalan parçanın kapak görseli arka plana dönüşür; paneller o görselin renklerini alan buzlu cam katmanlarına dönüşür. Müzik çalar, dönen bir plakla birlikte havada süzülen bir kapsül gibi görünür. Şarkı değiştiğinde tüm renkler de değişir.
 
 ![Aura Glass](preview.png)
