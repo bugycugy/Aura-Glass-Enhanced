@@ -6,12 +6,16 @@
   "usercss": "user.css",
   "schemes": "color.ini",
   "include": [
-    "https://cdn.jsdelivr.net/gh/bugycugy/aura-glass-spicetify@main/theme.js"
+    "https://cdn.jsdelivr.net/gh/bugycugy/Aura-Glass-Enhanced@main/theme.js"
   ],
   "authors": [
     {
       "name": "issacleral",
       "url": "https://github.com/issacleral"
+    },
+    {
+      "name": "bugycugy",
+      "url": "https://github.com/bugycugy"
     }
   ],
   "tags": [
