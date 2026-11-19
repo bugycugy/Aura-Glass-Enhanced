@@ -20,7 +20,7 @@ if ($LASTEXITCODE -ne 0) {
 }
 git push origin main
 
-$repo = "bugycugy/aura-glass-spicetify"
+$repo = "bugycugy/Aura-Glass-Enhanced"
 $archivos = @("manifest.json", "user.css", "color.ini", "theme.js", "README.md", "preview.png") +
   (Get-ChildItem -LiteralPath "$PSScriptRoot\capturas" -File -ErrorAction SilentlyContinue |
     Where-Object { $_.Extension -in @(".png", ".gif") } |
